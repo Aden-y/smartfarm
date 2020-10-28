@@ -1,5 +1,6 @@
-<%@ page import="components.Cart" %>
-<%@ page import="beans.OrderItem" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="beans.Order" %>
+<%@ page import="beans.User" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 10/8/2020
@@ -12,9 +13,9 @@
 <body>
 <jsp:include page="templates/nav.jsp"/>
 <div style="padding: 20px">
-    <h5 class="center title">Products in cart</h5>
+    <h5 class="center title">Store Keepers</h5>
     <%
-        Cart cart = (Cart) session.getAttribute("cart");
+        List<User> users = (List<User>) request.getAttribute("employees");
         if (request.getAttribute("message") != null) {
     %>
     <div class="alert alert-success center"><%=request.getAttribute("message")%></div>
@@ -30,25 +31,24 @@
     <div>
         <table class="highlight">
             <tr>
-                <th>Product</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Qty</th>
-                <th>Amount</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Register Date</th>
                 <th>Action</th>
             </tr>
             <%
-                for (OrderItem item: cart.items) {
+                for (User user: users) {
             %>
             <tr>
-                <td><%=item.getName()%></td>
-                <td><%=item.getDescription()%></td>
-                <td><%=item.getPrice()%></td>
-                <td><%=item.getQuantity()%></td>
-                <td><%=item.getAmount()%></td>
+                <td><%=user%></td>
+                <td><%=user.getEmail()%></td>
+                <td><%=user.getPhone()%></td>
+                <td><%=user.getRegisteredon()%></td>
                 <td>
-                    <a href="cart?did=<%=item.getId()%>" class="btn-small red darken-4"><i class="fa fa-trash"></i>&nbsp;remove</a>
+                    <a href="customers?did=<%=user.getId()%>"><i class="fa fa-trash"></i> </a>
                 </td>
+
             </tr>
             <%
                 }

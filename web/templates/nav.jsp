@@ -15,9 +15,15 @@
 
 
         <ul class="right hide-on-med-and-down">
-<%--            <li><a href="index.jsp">Home</a></li>--%>
-<%--            <li><a href="products">Shop</a></li>--%>
-<%--            <li><a href="register">Sign up</a></li>--%>
+            <%
+                if(user == null) {
+            %>
+            <li><a href="index.jsp">Home</a></li>
+            <li><a href="products">Shop</a></li>
+            <li><a href="register">Sign up</a></li>
+            <%
+                }else {
+            %>
 
                 <li><a href="orders">Orders</a></li>
                 <li><a class="dropdown-trigger" href="#!" data-target="farm">
@@ -59,7 +65,7 @@
 
                 <ul id="users" class="dropdown-content green darken-4">
                     <li><a href="register">Add employee</a></li>
-                    <li><a href="employees">Employees</a></li>
+                    <li><a href="employees">Store Keepers</a></li>
                     <li><a href="customers">Customers</a></li>
                 </ul>
 
@@ -67,6 +73,9 @@
                     <li><a href="profile">Profile</a></li>
                     <li><a href="logout">Logout</a></li>
                 </ul>
+            <%
+                }
+            %>
         </ul>
 
         <ul id="nav-mobile" class="sidenav">

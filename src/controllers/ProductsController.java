@@ -24,14 +24,14 @@ public class ProductsController extends HttpServlet {
             request.getSession().setAttribute("cart", new Cart());
         }
 
-        if (request.getAttribute("pc") != null) {
+        if (request.getParameter("pc") != null) {
             PlantProduct plantProduct = PlantProductRepository.get(Long.parseLong(request.getParameter("pc")));
             Cart cart =  (Cart) request.getSession().getAttribute("cart");
             cart.add(plantProduct);
         }
 
 
-        if (request.getAttribute("ac") != null) {
+        if (request.getParameter("ac") != null) {
             AnimalProduct animalProduct = AnimalProductRepository.get(Long.parseLong(request.getParameter("ac")));
             Cart cart = (Cart) request.getSession().getAttribute("cart");
             cart.add(animalProduct);

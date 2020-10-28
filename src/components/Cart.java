@@ -1,6 +1,5 @@
 package components;
 import beans.AnimalProduct;
-import beans.Order;
 import beans.OrderItem;
 import beans.PlantProduct;
 

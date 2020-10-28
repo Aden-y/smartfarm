@@ -35,7 +35,7 @@
 
 
     <div class="row">
-        <div class="col s12 m4 l4">
+        <div class="col s12 m8 l8">
             <table class="highlight">
                 <tr>
                     <th>Name</th>
@@ -62,7 +62,7 @@
             </table>
         </div>
 
-        <div class="col s12 m8 l8">
+        <div class="col s12 m4 l4">
             <div class="card center" style="padding: 20px">
                 <h6 class="center title">New Item</h6>
                 <form action="plants-store" method="post">

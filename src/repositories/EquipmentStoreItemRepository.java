@@ -48,7 +48,7 @@ import java.util.List;
   String sql = "insert into "+table+"(name, quantity, updatedat) values(" +
           "'"+object.getName()+"'," +
           ""+object.getQuantity()+"," +
-          "'"+object.getUpdatedat()+"'";
+          "'"+object.getUpdatedat()+"')";
   DatabaseAccess.executeUpdate(sql);
  }
 

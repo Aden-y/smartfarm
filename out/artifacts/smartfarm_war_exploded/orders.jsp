@@ -1,5 +1,5 @@
-<%@ page import="components.Cart" %>
-<%@ page import="beans.OrderItem" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="beans.Order" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 10/8/2020
@@ -12,9 +12,9 @@
 <body>
 <jsp:include page="templates/nav.jsp"/>
 <div style="padding: 20px">
-    <h5 class="center title">Products in cart</h5>
+    <h5 class="center title">Orders</h5>
     <%
-        Cart cart = (Cart) session.getAttribute("cart");
+        List<Order> orders = (List<Order>) request.getAttribute("orders");
         if (request.getAttribute("message") != null) {
     %>
     <div class="alert alert-success center"><%=request.getAttribute("message")%></div>
@@ -29,26 +29,28 @@
 
     <div>
         <table class="highlight">
+<%--            Order(Long id, int userid, String date, String status, double amount)--%>
             <tr>
-                <th>Product</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Qty</th>
+                <th>ID</th>
+                <th>Customer</th>
+                <th>Date</th>
                 <th>Amount</th>
-                <th>Action</th>
+                <th>Status</th>
+                <th>Items</th>
             </tr>
             <%
-                for (OrderItem item: cart.items) {
+                for (Order order: orders) {
             %>
             <tr>
-                <td><%=item.getName()%></td>
-                <td><%=item.getDescription()%></td>
-                <td><%=item.getPrice()%></td>
-                <td><%=item.getQuantity()%></td>
-                <td><%=item.getAmount()%></td>
+                <td><%=order.getId()%></td>
+                <td><%=order.getCustomer()%></td>
+                <td><%=order.getDate()%></td>
+                <td><%=order.getAmount()%></td>
+                <td><%=order.getStatus()%></td>
                 <td>
-                    <a href="cart?did=<%=item.getId()%>" class="btn-small red darken-4"><i class="fa fa-trash"></i>&nbsp;remove</a>
+                    <a href="order-items?order=<%=order.getId()%>">See items</a>
                 </td>
+
             </tr>
             <%
                 }

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="beans.User" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 10/8/2020
@@ -13,6 +13,8 @@
 <br><br>
 <div class="container center" style="max-width:  400px;">
     <%
+        User user = (User) session.getAttribute("user");
+
         if (request.getAttribute("message") != null) {
     %>
     <div class="alert alert-success center"><%=request.getAttribute("message")%></div>
@@ -27,8 +29,17 @@
     <div  class="p-2">
         <form action="#" action="register" method="post">
             <div class="card" style="padding: 20px">
-                <div class="center title"><h4>Customer Registration</h4></div>
-
+                <%
+                    if (user == null) {
+                %>
+                <div class="center title"><h5>Customer Registration</h5></div>
+                <%
+                    } else {
+                %>
+                <div class="center title"><h5>Register Employee</h5></div>
+                <%
+                    }
+                %>
                 <div class="card-body">
                     <div class="row">
                         <div class="col s12 m6 l6">
@@ -53,10 +64,20 @@
                     </div>
                 </div>
                 <div class="card-footer text-center">
+                    <%
+                        if (user == null) {
+                    %>
                     <button type="submit" class="btn green darken-4">Sign up</button>
                     <br><br>
 
                     <a href="index.jsp">Sign in</a>
+                    <%
+                        } else {
+                    %>
+                    <input type="submit" class="btn green darken-4" name="RegisterEmployee" value="Add Employee">
+                    <%
+                        }
+                    %>
                 </div>
             </div>
         </form>

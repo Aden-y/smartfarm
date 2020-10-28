@@ -102,4 +102,12 @@ public class UserRepository /*extends JpaRepository<User, Long>*/{
     public static User login(String email, String password) {
       return create(DatabaseAccess.executeQuery("select * from users where email ='"+email+"' and password = '"+password+"'"));
     }
+
+    public static List<User> getEmployees() {
+      return createList(DatabaseAccess.executeQuery("select * from users where type = 'Store Keeper'"));
+    }
+
+   public static List<User> getCustomers() {
+      return createList(DatabaseAccess.executeQuery("select * from users where type = 'Customer'"));
+   }
 }

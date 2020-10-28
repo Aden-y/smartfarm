@@ -1,6 +1,8 @@
 package beans;
 
 
+import repositories.UserRepository;
+
 import java.util.List;
 
 public class Order {
@@ -73,5 +75,9 @@ public class Order {
         for (OrderItem item: items ) {
             amount+=item.getAmount();
         }
+    }
+
+    public User customer() {
+        return UserRepository.get((long)userid);
     }
 }
