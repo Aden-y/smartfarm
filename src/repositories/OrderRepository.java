@@ -2,6 +2,7 @@ package repositories;
 
 
 import beans.Order;
+import beans.OrderItem;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +13,6 @@ public class OrderRepository  /*extends JpaRepository<Order, Long> */{
     private static final  String table = "orders";
     public static Order create(ResultSet resultSet) {
         try {
-            //Long id, int userid, String date, String status, double amount
             if (resultSet.next()) {
                 return new Order(resultSet.getLong("id"),
                         resultSet.getInt("userid"),
@@ -49,7 +49,13 @@ public class OrderRepository  /*extends JpaRepository<Order, Long> */{
                 "'"+object.getDate()+"'," +
                 "'"+object.getStatus()+"'," +
                 ""+object.getAmount()+")";
-        DatabaseAccess.executeUpdate(sql);
+        int id =   DatabaseAccess.getLastInsertedIndex(sql);
+
+        for (OrderItem item: object.$getItems()) {
+            item.sell();
+            item.setOrderId(id);
+            OrderItemRepository.create(item);
+        }
     }
 
     public static void update(Order object) {
@@ -73,5 +79,9 @@ public class OrderRepository  /*extends JpaRepository<Order, Long> */{
 
     public static List<Order> all() {
         return createList(DatabaseAccess.executeQuery("select * from "+table));
+    }
+
+    public static List<Order>  findByCustomerId(Long id) {
+        return createList(DatabaseAccess.executeQuery("select * from "+table+" where userid ="+id));
     }
 }

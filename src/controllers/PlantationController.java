@@ -53,7 +53,6 @@ public class PlantationController extends HttpServlet {
             PlantRepository.delete(plant.getId());
             response.sendRedirect("plantation?fid="+plant.getFarmid());
             return;
-
         }
 
         if (request.getParameter("eid") != null) {

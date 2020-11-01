@@ -48,7 +48,8 @@
                 <td><%=order.getAmount()%></td>
                 <td><%=order.getStatus()%></td>
                 <td>
-                    <a href="order-items?order=<%=order.getId()%>">See items</a>
+                    <a class="btn-small" href="order-items?order=<%=order.getId()%>">See items</a>
+                    <a class="btn-small" href="order?complete=<%=order.getId()%>">Complete</a>
                 </td>
 
             </tr>

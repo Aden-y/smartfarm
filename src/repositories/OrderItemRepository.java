@@ -41,7 +41,6 @@ public class OrderItemRepository /*extends JpaRepository<OrderItem, Long> */{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return list;
     }
 
@@ -82,5 +81,9 @@ public class OrderItemRepository /*extends JpaRepository<OrderItem, Long> */{
 
     public static List<OrderItem> all() {
         return createList(DatabaseAccess.executeQuery("select * from "+table));
+    }
+
+    public static List<OrderItem> findByParentId(Long id) {
+        return createList(DatabaseAccess.executeQuery("select * from orderitems where orderid = "+id));
     }
 }

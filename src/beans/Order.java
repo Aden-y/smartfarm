@@ -1,7 +1,8 @@
 package beans;
-
-
+import components.Cart;
+import repositories.OrderItemRepository;
 import repositories.UserRepository;
+import services.DateService;
 
 import java.util.List;
 
@@ -19,6 +20,20 @@ public class Order {
         this.date = date;
         this.status = status;
         this.amount = amount;
+        items = OrderItemRepository.findByParentId(id);
+    }
+
+    public List<OrderItem> $getItems() {
+        return items;
+    }
+
+
+    public Order(Cart cart, int userid) {
+        items = cart.items;
+        this.userid = userid;
+        this.status = "Pending";
+        amount = cart.computeTotal();
+        date = DateService.today();
     }
 
     public Long getId() {
@@ -30,7 +45,7 @@ public class Order {
     }
 
     public List<OrderItem> getItems() {
-        return items;
+        return OrderItemRepository.findByParentId(id);
     }
 
     public void setItems(List<OrderItem> items) {

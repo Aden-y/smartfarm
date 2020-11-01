@@ -61,7 +61,7 @@
                        <%
                            if (plant.getProducts() != null && plant.getProducts().size() == 0) {
                        %>
-                       <a href="plantation?did=<%=plant.getId()%>" class="btn-small red darken-4"><i class="fa fa-trash"></a>
+                       <a href="plantation?did=<%=plant.getId()%>" class="btn-small red darken-4"><i class="fa fa-trash"></i></a>
                        <%
                            }else {
                        %>

@@ -22,7 +22,7 @@ public class AnimalProductsController extends HttpServlet {
             int animalId = Integer.parseInt(request.getParameter("animalid"));
             double price = Double.parseDouble(request.getParameter("price")),
                     quantity = Double.parseDouble(request.getParameter("quantity"));
-            AnimalProductRepository.create(new AnimalProduct(name, description, units, quantity, price, new Long(animalId) , null));
+            AnimalProductRepository.create(new AnimalProduct(name, description, units, quantity, price, (long)animalId , null));
             response.sendRedirect("animal-products?a="+animalId);
             return;
         }
@@ -66,7 +66,7 @@ public class AnimalProductsController extends HttpServlet {
         if (request.getParameter("a") != null) {
             request.setAttribute("products",
                     AnimalProductRepository.
-                            findByParentId(new Long(Integer.parseInt(request.getParameter("a")))));
+                            findByParentId(Long.parseLong(request.getParameter("a"))));
             request.setAttribute("animal", AnimalRepository.get(Long.parseLong(request.getParameter("a"))));
             request.getRequestDispatcher("animal-products.jsp").forward(request, response);
         }else {

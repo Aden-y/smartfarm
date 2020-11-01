@@ -1,3 +1,5 @@
+<%@ page import="components.Cart" %>
+<%@ page import="beans.OrderItem" %>
 <%@ page import="java.util.List" %>
 <%@ page import="beans.Order" %><%--
   Created by IntelliJ IDEA.
@@ -12,9 +14,10 @@
 <body>
 <jsp:include page="templates/nav.jsp"/>
 <div style="padding: 20px">
-    <h5 class="center title">Orders</h5>
+    <h5 class="center title">Order Items</h5>
     <%
-        List<Order> orders = (List<Order>) request.getAttribute("orders");
+        List<OrderItem> items = (List<OrderItem>) request.getAttribute("items");
+        Order order = (Order) request.getAttribute("order");
         if (request.getAttribute("message") != null) {
     %>
     <div class="alert alert-success center"><%=request.getAttribute("message")%></div>
@@ -29,33 +32,30 @@
 
     <div>
         <table class="highlight">
-<%--            Order(Long id, int userid, String date, String status, double amount)--%>
             <tr>
-                <th>ID</th>
-                <th>Customer</th>
-                <th>Date</th>
+                <th>Product</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Qty</th>
                 <th>Amount</th>
-                <th>Status</th>
-                <th>Items</th>
             </tr>
             <%
-                for (Order order: orders) {
+                for (OrderItem item: items) {
             %>
             <tr>
-                <td><%=order.getId()%></td>
-                <td><%=order.getCustomer()%></td>
-                <td><%=order.getDate()%></td>
-                <td><%=order.getAmount()%></td>
-                <td><%=order.getStatus()%></td>
-                <td>
-                    <a class="btn-small" href="order-items?order=<%=order.getId()%>">See items</a>
-                    <a class="btn-small" href="order?complete=<%=order.getId()%>">Complete</a>
-                </td>
-
+                <td><%=item.getName()%></td>
+                <td><%=item.getDescription()%></td>
+                <td><%=item.getPrice()%></td>
+                <td><%=item.getQuantity()%></td>
+                <td><%=item.getAmount()%></td>
             </tr>
             <%
                 }
             %>
+            <tr>
+                <td colspan="4"><strong>Total</strong></td>
+                <td colspan="2"><strong>Ksh <%=order.getAmount()%></strong></td>
+            </tr>
 
         </table>
     </div>
