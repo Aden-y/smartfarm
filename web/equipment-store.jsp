@@ -17,6 +17,7 @@
         response.sendRedirect("equipment-store");
         return;
     }
+    EquipmentStoreItem item1 = (EquipmentStoreItem) request.getAttribute("item");
 %>
 <div style="padding: 20px">
     <h5 class="title center">Equipments Store</h5>
@@ -51,10 +52,8 @@
                     <td><%=item.getQuantity()%></td>
                     <td><%=item.getUpdatedat()%></td>
                     <td>
-
-
-                        <a href="equipment-store?did=<%=item.getId()%>" class="btn-small red darken-4"><i class="fa fa-trash"></i>&nbsp;Delete</a>
-                        <a href="equipment-store?eid=<%=item.getId()%>"  class="btn-small "><i class="fa fa-info"></i>&nbsp;Edit</a>
+                        <a href="equipment-store?did=<%=item.getId()%>" class="btn-small red darken-4"><i class="fa fa-trash"></i>&nbsp;</a>
+                        <a href="equipment-store?eid=<%=item.getId()%>"  class="btn-small "><i class="fa fa-edit"></i>&nbsp;</a>
                     </td>
                 </tr>
 
@@ -63,6 +62,10 @@
                 %>
             </table>
         </div>
+
+       <%
+           if (item1 == null) {
+       %>
 
         <div class="col s12 m4 l4">
             <div class="card center" style="padding: 20px">
@@ -84,6 +87,35 @@
                 </form>
             </div>
         </div>
+
+        <%
+            } else  {
+        %>
+
+        <div class="col s12 m4 l4">
+            <div class="card center" style="padding: 20px">
+                <h4 class="center title">Update Item</h4>
+                <form action="equipment-store"  method="post">
+                    <div class=" form-group">
+                         <input type="number"  name="id" value="<%=item1.getId()%>" hidden>
+                        <input type="text"  name="name" placeholder="Item name"
+                               required="true" value="<%=item1.getName()%>" class="center validate">
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <label>Quantity in store</label>
+                        <input type="number" value="<%=item1.getQuantity()%>" id="quantity" name="quantity" placeholder="Quantity" required="true"
+                               class="center validate" min="0.0">
+                    </div>
+                    <div class="mb-2">
+                        <input type="submit" class="btn green darken-4" name="UpdateItem" value="Update Item">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <%
+            }
+        %>
     </div>
 
 </div>

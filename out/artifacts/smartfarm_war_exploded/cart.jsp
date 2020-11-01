@@ -28,6 +28,16 @@
     %>
 
     <div>
+        <%
+            if(cart.items.size() > 0) {
+        %>
+
+        <form action="cart" method="post">
+            <input type="submit" class="btn-small right" name="CheckOut" value="Check Out">
+        </form>
+        <%
+            }
+        %>
         <table class="highlight">
             <tr>
                 <th>Product</th>
@@ -49,10 +59,15 @@
                 <td>
                     <a href="cart?did=<%=item.getId()%>" class="btn-small red darken-4"><i class="fa fa-trash"></i>&nbsp;remove</a>
                 </td>
+
             </tr>
             <%
                 }
             %>
+            <tr>
+                <td colspan="4"><strong>Total</strong></td>
+                <td colspan="2"><strong>Ksh <%=cart.computeTotal()%></strong></td>
+            </tr>
 
         </table>
     </div>

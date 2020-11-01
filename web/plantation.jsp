@@ -13,6 +13,7 @@
 <body>
 <%
     Farm farm = (Farm) request.getAttribute("farm");
+    Plant plant1 = (Plant) request.getAttribute("plant");
     List<Plant> plants = (List<Plant>) request.getAttribute("plants");
 
     if (farm == null || plants == null) {
@@ -57,8 +58,18 @@
                    <td><%=plant.getRootscount()%></td>
                    <td><%=plant.getPlantedon()%></td>
                    <td>
-                       <a href="plantation?did=<%=plant.getId()%>" class="btn-small red darken-4">Delete</a>
-                       <a href="plantation?eid=<%=plant.getId()%>" class="btn-small">Edit</a>
+                       <%
+                           if (plant.getProducts() != null && plant.getProducts().size() == 0) {
+                       %>
+                       <a href="plantation?did=<%=plant.getId()%>" class="btn-small red darken-4"><i class="fa fa-trash"></a>
+                       <%
+                           }else {
+                       %>
+                       <a disabled href="plantation?did=<%=plant.getId()%>" class="btn-small red darken-4"><i class="fa fa-trash"></i></a>
+                       <%
+                           }
+                       %>
+                       <a href="plantation?eid=<%=plant.getId()%>" class="btn-small"><i class="fa fa-edit"></i></a>
                        <a href="plant-products?p=<%=plant.getId()%>" class="btn-small green darken-4">Products</a>
                    </td>
                </tr>
@@ -69,12 +80,16 @@
            </table>
        </div>
 
+       <%
+           if (plant1 == null) {
+       %>
+
        <div class="col s12 l4 m4">
            <div class="card center" style="padding: 20px">
                <h6 class="center title">Add Plant to this firm</h6>
                <form action="plantation"  method="post">
                    <div class=" form-group">
-<%--                       <input type="number" th:field="*{id}" hidden>--%>
+                       <%--                       <input type="number" th:field="*{id}" hidden>--%>
                        <input type="number" value="<%=farm.getId()%>" name="farmid" hidden>
                        <input type="text"  id="name" name="name" placeholder="Plant name"
                               required="true" class="center validate">
@@ -108,6 +123,54 @@
                </form>
            </div>
        </div>
+       <%
+           } else  {
+       %>
+
+       <div class="col s12 l4 m4">
+           <div class="card center" style="padding: 20px">
+               <h6 class="center title">Edit Plant Details</h6>
+               <form action="plantation"  method="post">
+                   <div class=" form-group">
+                     <input type="number" name="id" value="<%=plant1.getId()%>" hidden>
+                       <input type="number" value="<%=farm.getId()%>" name="farmid" hidden>
+                       <input type="text" value="<%=plant1.getName()%>"  id="name" name="name" placeholder="Plant name"
+                              required="true" class="center validate">
+                   </div>
+
+                   <div class=" form-group">
+                       <input type="text"  id="category" value="<%=plant1.getCategory()%>"
+                              name="category" placeholder="Plant category " required="true" class="center validate">
+                   </div>
+
+                   <div class="form-group">
+                       <textarea  id="description"  value="<%=plant1.getDescription()%>"name="description"  class="center"
+                                  placeholder="Plant description " required="true" style="width:100%; height: 200px;">
+
+                       </textarea>
+                   </div>
+
+                   <div class=" form-group">
+                       <input type="number" value="<%=plant1.getRootscount()%>"  id="rootscount" name="rootscount" placeholder="Roots(optional)" class="center">
+                   </div>
+
+                   <div class=" form-group">
+                       <label>Planted on <span>(optional)</span></label>
+                       <input type="date"  value="<%=plant1.getPlantedon()%>"  id="plantedon" name="plantedon" placeholder="Date planted" class="center">
+                   </div>
+
+
+                   <div>
+                       <input type="submit" class="btn green darken-4" name="UpdatePlant" value="Update Plant">
+                   </div>
+               </form>
+           </div>
+       </div>
+       <%
+           }
+       %>
+
+
    </div>
 </div>
 </body>

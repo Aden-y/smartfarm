@@ -13,6 +13,7 @@
 <jsp:include page="templates/nav.jsp"/>
 <%
     List<Farm> farms = (List<Farm>) request.getAttribute("farms");
+    Farm farm = (Farm) request.getAttribute("farm");
     if (farms == null) {
         response.sendRedirect("farms");
         return;
@@ -43,16 +44,26 @@
                     <th>ACTION</th>
                 </tr>
                 <%
-                    for (Farm farm: farms) {
+                    for (Farm farm1: farms) {
                 %>
                 <tr>
-                    <td><%=farm.getName()%></td>
-                    <td><%=farm.getSize()%>&nbsp;Acres</td>
-                    <td><%=farm.getLocation()%></td>
+                    <td><%=farm1.getName()%></td>
+                    <td><%=farm1.getSize()%>&nbsp;Acres</td>
+                    <td><%=farm1.getLocation()%></td>
                     <td>
-                        <a  href="farms?did=<%=farm.getId()%>" class="btn-small red darken-4"><i class="fa fa-trash"></i>&nbsp;Delete</a>
-                        <a href="farms?eid=<%=farm.getId()%>" class="btn-small"><i class="fa fa-edit"></i>&nbsp;Edit</a>
-                        <a href="plantation?fid=<%=farm.getId()%>"  class="btn-small green darken-4"><i class="fas fa-seedling"></i>&nbsp;Plantations</a>
+                        <%
+                            if (farm1.getPlants() != null && farm1.getPlants().size() == 0) {
+                        %>
+                        <a  href="farms?did=<%=farm1.getId()%>" class="btn-small red darken-4"><i class="fa fa-trash"></i>&nbsp;</a>
+                        <%
+                        }else {
+                        %>
+                        <a disabled href="farms?did=<%=farm1.getId()%>" class="btn-small red darken-4"><i class="fa fa-trash"></i>&nbsp;</a>
+                        <%
+                            }
+                        %>
+                        <a href="farms?eid=<%=farm1.getId()%>" class="btn-small"><i class="fa fa-edit"></i>&nbsp;</a>
+                        <a href="plantation?fid=<%=farm1.getId()%>"  class="btn-small green darken-4"><i class="fas fa-seedling"></i>&nbsp;Plantations</a>
                     </td>
                 </tr>
 
@@ -62,9 +73,13 @@
             </table>
         </div>
 
+       <%
+           if (farm == null) {
+       %>
         <div class="col s12 m4 l4">
-
+            <br><br>
             <div class="card center" style="padding: 20px">
+
                 <h6 class="center title">New Farm</h6>
                 <form action="farms"  method="post">
                     <div class=" form-group">
@@ -88,6 +103,40 @@
                 </form>
             </div>
         </div>
+        <%
+            } else {
+        %>
+        <div class="col s12 m4 l4">
+            <br><br>
+            <div class="card center" style="padding: 20px">
+
+                <h6 class="center title">Update Farm Details</h6>
+                <form action="farms"  method="post">
+                    <div class=" form-group">
+                        <label>Farm Name</label>
+                        <input type="number"  name="id" value="<%=farm.getId()%>" hidden>
+                        <input type="text" value="<%=farm.getName()%>"  id="name" name="name" placeholder="Farm name" required="true" class="validate center">
+                    </div>
+
+                    <div class=" form-group">
+                        <label>Farm Size</label>
+                        <input type="number" min="0.0"  value="<%=farm.getSize()%>" name="size" placeholder="Farm size" required="true" class="validate center">
+                    </div>
+                    <div class=" form-group">
+                        <label>Farm Location</label>
+                        <input type="text"  value="<%=farm.getLocation()%>" name="location" placeholder="Farm location" required="true" class="validate center">
+                    </div>
+
+                    <div>
+                        <input type="submit" class="btn green darken-4" name="UpdateFarm" value="update firm">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <%
+            }
+        %>
 
     </div>
 

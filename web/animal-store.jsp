@@ -13,6 +13,7 @@
 <jsp:include page="templates/nav.jsp"/>
 <%
     List<AnimalStoreItem> items = (List<AnimalStoreItem>) request.getAttribute("items");
+    AnimalStoreItem item1 = (AnimalStoreItem) request.getAttribute("item");
     if (items == null) {
         response.sendRedirect("animal-store");
         return;
@@ -52,8 +53,8 @@
                     <td><%=item.getQuantity()%>&nbsp;<%=item.getUnits()%></td>
                     <td><%=item.getUpdatedat()%></td>
                     <td>
-                        <a href="animal-store?did=<%=item.getId()%>" class="btn-small red darken-4"><i class="fa fa-trash"></i>&nbsp;Delete</a>
-                        <a href="animal-store?eid=<%=item.getId()%>"  class="btn-small "><i class="fa fa-info"></i>&nbsp;Edit</a>
+                        <a href="animal-store?did=<%=item.getId()%>" class="btn-small red darken-4"><i class="fa fa-trash"></i>&nbsp;</a>
+                        <a href="animal-store?eid=<%=item.getId()%>"  class="btn-small "><i class="fa fa-edit"></i>&nbsp;</a>
                     </td>
                 </tr>
 
@@ -63,35 +64,74 @@
             </table>
         </div>
 
+       <%
+           if (item1 == null) {
+       %>
         <div class="col s12 m4 l4">
-           <div class="card center" style="padding: 20px">
-               <h6 class="center title">New Item</h6>
-               <form action="animal-store" method="post">
-                   <div class=" form-group">
-                       <label>Item Name</label>
-<%--                       <input type="number" hidden th:field="*{id}">--%>
-                       <input type="text"  id="name" name="name" placeholder="Item name"
-                              required="true" class="center validate">
-                   </div>
-                   <div class="row">
-                       <div class="col s6">
-                           <label>Units </label>
-                           <input type="text"  id="units" name="units" placeholder="Units of measure e.g kgs, ltrs ..."
-                                  required="true" class="center validate">
-                       </div>
+            <div class="card center" style="padding: 20px">
+                <h6 class="center title">New Item</h6>
+                <form action="animal-store" method="post">
+                    <div class=" form-group">
+                        <label>Item Name</label>
+                        <%--                       <input type="number" hidden th:field="*{id}">--%>
+                        <input type="text"  id="name" name="name" placeholder="Item name"
+                               required="true" class="center validate">
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <label>Units </label>
+                            <input type="text"  id="units" name="units" placeholder="Units of measure e.g kgs, ltrs ..."
+                                   required="true" class="center validate">
+                        </div>
 
-                       <div class="col s6">
-                           <label>Quantity in store</label>
-                           <input type="number"  id="quantity" name="quantity"
-                                  placeholder="Quantity" required="true" class="center validate" min="0.0">
-                       </div>
-                   </div>
-                   <div >
-                       <input type="submit" class="btn green darken-4" name="NewItem" value="Save">
-                   </div>
-               </form>
-           </div>
+                        <div class="col s6">
+                            <label>Quantity in store</label>
+                            <input type="number"  id="quantity" name="quantity"
+                                   placeholder="Quantity" required="true" class="center validate" min="0.0">
+                        </div>
+                    </div>
+                    <div >
+                        <input type="submit" class="btn green darken-4" name="NewItem" value="Save">
+                    </div>
+                </form>
+            </div>
         </div>
+        <%
+            } else {
+        %>
+        <div class="col s12 m4 l4">
+            <div class="card center" style="padding: 20px">
+                <h6 class="center title">Update Item</h6>
+                <form action="animal-store" method="post">
+                    <div class=" form-group">
+                        <label>Item Name</label>
+                         <input type="number" hidden name="id" value="<%=item1.getId()%>">
+                        <input type="text"  id="name" name="name" placeholder="Item name"
+                               value="<%=item1.getName()%>"
+                               required="true" class="center validate">
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <label>Units </label>
+                            <input type="text" value="<%=item1.getName()%>"  id="units" name="units" placeholder="Units of measure e.g kgs, ltrs ..."
+                                   required="true" class="center validate">
+                        </div>
+
+                        <div class="col s6">
+                            <label>Quantity in store</label>
+                            <input type="number"  id="quantity" name="quantity" value="<%=item1.getQuantity()%>"
+                                   placeholder="Quantity" required="true" class="center validate" min="0.0">
+                        </div>
+                    </div>
+                    <div >
+                        <input type="submit" class="btn green darken-4" name="UpdateItem" value="Update Item">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <%
+            }
+        %>
     </div>
 </div>
 </body>

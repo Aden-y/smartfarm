@@ -21,7 +21,6 @@ public class Cart {
                 return;
             }
         }
-
         OrderItem item1 = new OrderItem(id++, product.getName(),
                 product.getDescription(), 1, 0,
                 product.getPrice(), product.getPrice());
@@ -43,5 +42,31 @@ public class Cart {
         item1.type = OrderItemType.ANIMAL;
         item1.idOriginal = product.getId();
         items.add(item1);
+    }
+
+    public void remove(int id) {
+        int did = -1;
+        for (OrderItem item: items) {
+            did++;
+            if (item.getId() == id) {
+                break;
+            }
+        }
+
+        items.remove(did);
+    }
+
+    public double computeTotal() {
+        double total = 0.0;
+        for (OrderItem item: items) {
+            total+=item.getAmount();
+        }
+        return total;
+    }
+
+    public void checkout() {
+        for (OrderItem item: items) {
+
+        }
     }
 }

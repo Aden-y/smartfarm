@@ -55,9 +55,23 @@
                 <tr>
                     <td><%=plantProduct.getName()%></td>
                     <td><%=plantProduct.getDescription()%></td>
-                    <td>Ksh .<%=plantProduct.getPrice()%></td>
+                    <td>Ksh <%=plantProduct.getPrice()%></td>
                     <td>
+
+
+                        <%
+                            if(plantProduct.getQuantity() > 0) {
+                        %>
                         <a href="products?pc=<%=plantProduct.getId()%>" class="btn-small"><i class="fas fa-cart-plus"></i>Add</a>
+                        <%
+                        } else {
+                        %>
+                        <button class="btn-small" disabled>
+                            Sold out
+                        </button>
+                        <%
+                            }
+                        %>
                     </td>
                 </tr>
 
@@ -67,9 +81,21 @@
                 <tr>
                     <td><%=animalProduct.getName()%></td>
                     <td><%=animalProduct.getDescription()%></td>
-                    <td>Ksh .<%=animalProduct.getPrice()%></td>
+                    <td>Ksh <%=animalProduct.getPrice()%></td>
                     <td>
+                        <%
+                            if(animalProduct.getQuantity() > 0) {
+                        %>
                         <a href="products?ac=<%=animalProduct.getId()%>" class="btn-small"><i class="fas fa-cart-plus"></i>Add</a>
+                        <%
+                            } else {
+                        %>
+                            <button class="btn-small" disabled>
+                                Sold out
+                            </button>
+                        <%
+                            }
+                        %>
                     </td>
                 </tr>
                 <%

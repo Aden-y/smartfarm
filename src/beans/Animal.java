@@ -1,5 +1,7 @@
 
 package beans;
+import repositories.AnimalProductRepository;
+
 import java.util.List;
 /**
  *
@@ -100,7 +102,7 @@ public class Animal{
     }
 
     public List<AnimalProduct> getProducts() {
-        return products;
+       return AnimalProductRepository.findByParentId(id);
     }
 
     public void setProducts(List<AnimalProduct> products) {

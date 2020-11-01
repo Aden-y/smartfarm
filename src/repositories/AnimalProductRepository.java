@@ -83,7 +83,7 @@ public class AnimalProductRepository /* extends JpaRepository<AnimalProduct, Lon
         DatabaseAccess.executeUpdate(sql);
     }
 
-    public static List<AnimalProduct> findByAnimalId(Long id) {
+    public static List<AnimalProduct> findByParentId(Long id) {
         String sql = "select * from "+table+" where animalid = "+id;
         return createList(DatabaseAccess.executeQuery(sql));
     }
@@ -94,4 +94,11 @@ public class AnimalProductRepository /* extends JpaRepository<AnimalProduct, Lon
         return createList(DatabaseAccess.executeQuery("select * from "+table));
     }
 
+    public static void sell(Long idOriginal, int quantity) {
+        AnimalProduct product = get(idOriginal);
+        if (product.getQuantity() >= quantity) {
+            product.setQuantity(product.getQuantity() - quantity);
+            update(product);
+        }
+    }
 }

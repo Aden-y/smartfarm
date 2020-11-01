@@ -1,5 +1,7 @@
 package beans;
 
+import repositories.PlantProductRepository;
+
 import java.util.List;
 
 /**
@@ -92,7 +94,7 @@ public class Plant {
     }
 
     public List<PlantProduct> getProducts() {
-        return products;
+        return PlantProductRepository.findByParentId(farmid);
     }
      
     

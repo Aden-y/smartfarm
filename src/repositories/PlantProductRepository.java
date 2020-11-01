@@ -93,4 +93,11 @@ public class PlantProductRepository  /*extends JpaRepository<PlantProduct, Long>
         return createList(DatabaseAccess.executeQuery("select * from "+table));
     }
 
+    public static void sell(Long idOriginal, int quantity) {
+        PlantProduct product = get(idOriginal);
+        if (product.getQuantity() >= quantity) {
+            product.setQuantity(product.getQuantity() - quantity);
+            update(product);
+        }
+    }
 }

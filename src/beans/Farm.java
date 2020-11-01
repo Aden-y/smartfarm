@@ -1,6 +1,8 @@
 package beans;
 
 
+import repositories.PlantRepository;
+
 import java.util.List;
 
 /**
@@ -39,7 +41,7 @@ public class Farm {
     }
 
     public List<Plant> getPlants() {
-        return plants;
+        return PlantRepository.findByParentId(id);
     }
 
     public void setId(Long id) {

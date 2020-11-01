@@ -1,6 +1,8 @@
 package beans;
 
 import components.OrderItemType;
+import repositories.AnimalProductRepository;
+import repositories.PlantProductRepository;
 
 public class OrderItem {
     protected Long id;
@@ -87,6 +89,14 @@ public class OrderItem {
     public void add() {
         quantity++;
         amount+=price;
+    }
+
+    public void sell() {
+        if (type == OrderItemType.PLANT) {
+            PlantProductRepository.sell(idOriginal, quantity);
+        }else {
+            AnimalProductRepository.sell(idOriginal, quantity);
+        }
     }
 
 
