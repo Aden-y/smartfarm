@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "PlantStoreController", urlPatterns = {"/plant-store"})
+@WebServlet(name = "PlantStoreController", urlPatterns = {"/plants-store"})
 public class PlantStoreController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -41,7 +41,7 @@ public class PlantStoreController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("eid") != null) {
-            request.setAttribute("item", PlantStoreItemRepository.get(Long.parseLong(request.getParameter("did"))));
+            request.setAttribute("item", PlantStoreItemRepository.get(Long.parseLong(request.getParameter("eid"))));
         }
 
         if (request.getParameter("did") != null) {

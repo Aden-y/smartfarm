@@ -15,9 +15,12 @@ import java.util.List;
 public class PlantProductRepository  /*extends JpaRepository<PlantProduct, Long>*/{
     private static final  String table = "plantproducts";
     public static PlantProduct create(ResultSet resultSet) {
+        System.out.println("Here");
         try {
-            if (resultSet.next()) {
+            System.out.println("In try");
+
                 if (resultSet.next()) {
+                    System.out.println("Found object");
                     return  new PlantProduct(resultSet.getString("name"),
                             resultSet.getString("description"),
                             resultSet.getString("units"),
@@ -26,8 +29,9 @@ public class PlantProductRepository  /*extends JpaRepository<PlantProduct, Long>
                             resultSet.getLong("plantid"),
                             resultSet.getLong("id"));
                 }
-            }
+
         } catch (SQLException e) {
+            System.out.println("Exception");
             e.printStackTrace();
         }
         return null;
@@ -65,6 +69,7 @@ public class PlantProductRepository  /*extends JpaRepository<PlantProduct, Long>
 
     public static PlantProduct get(Long id) {
         String sql = "select * from "+table+" where id = "+id;
+        System.out.println(sql);
         return create(DatabaseAccess.executeQuery(sql));
     }
 

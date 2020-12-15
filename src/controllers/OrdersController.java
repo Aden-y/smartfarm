@@ -18,6 +18,11 @@ public class OrdersController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getParameter("complete") != null) {
+            Order order = OrderRepository.get(Long.parseLong(request.getParameter("complete")));
+            order.setStatus("Complete");
+            OrderRepository.update(order);
+        }
         User user = (User) request.getSession().getAttribute("user");
         if (user.getType().equals("Customer")) {
             request.setAttribute("orders", OrderRepository.findByCustomerId(user.getId()));
@@ -26,4 +31,6 @@ public class OrdersController extends HttpServlet {
         }
         request.getRequestDispatcher("orders.jsp").forward(request, response);
     }
+
+
 }

@@ -53,7 +53,7 @@
                     <td><%=item.getUpdatedat()%></td>
                     <td>
                         <a href="plants-store?did=<%=item.getId()%>" class="btn-small red darken-4"><i class="fa fa-trash"></i>&nbsp;</a>
-                        <a href="plants-store?eid=<%=item.getId()%>"  class="btn-small "><i class="fa fa-info"></i>&nbsp;</a>
+                        <a href="plants-store?eid=<%=item.getId()%>"  class="btn-small "><i class="fa fa-edit"></i>&nbsp;</a>
                     </td>
                 </tr>
 
@@ -64,7 +64,7 @@
         </div>
 
        <%
-           if (item1 = null) {
+           if (item1 == null) {
        %>
         <div class="col s12 m4 l4">
             <br><br>

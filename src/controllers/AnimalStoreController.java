@@ -39,7 +39,7 @@ public class AnimalStoreController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("eid") != null) {
-            request.setAttribute("item", AnimalStoreItemRepository.get(Long.parseLong(request.getParameter("did"))));
+            request.setAttribute("item", AnimalStoreItemRepository.get(Long.parseLong(request.getParameter("eid"))));
         }
 
         if (request.getParameter("did") != null) {

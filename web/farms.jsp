@@ -128,7 +128,7 @@
                     </div>
 
                     <div>
-                        <input type="submit" class="btn green darken-4" name="UpdateFarm" value="update firm">
+                        <input type="submit" class="btn green darken-4" name="UpdateFarm" value="update Farm">
                     </div>
                 </form>
             </div>

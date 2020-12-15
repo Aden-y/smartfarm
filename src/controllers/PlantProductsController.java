@@ -58,9 +58,7 @@ public class PlantProductsController extends HttpServlet {
         if (request.getParameter("eid") != null) {
             PlantProduct product = PlantProductRepository.get(Long.parseLong(request.getParameter("eid")));
             request.setAttribute("product", product);
-            request.setAttribute("products",
-                    PlantProductRepository.
-                            findByParentId(product.getPlantid()));
+            request.setAttribute("products",PlantProductRepository.findByParentId(product.getPlantid()));
             request.setAttribute("plant", PlantRepository.get(product.getPlantid()));
             request.getRequestDispatcher("plant-products.jsp").forward(request, response);
             return;

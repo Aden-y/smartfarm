@@ -49,9 +49,21 @@
                 <td><%=order.getStatus()%></td>
                 <td>
                     <a class="btn-small" href="order-items?order=<%=order.getId()%>">See items</a>
-                    <a class="btn-small" href="order?complete=<%=order.getId()%>">Complete</a>
-                </td>
+                    <%
+                        if (order.getStatus().equals("Pending")) {
+                    %>
+                    <a class="btn-small" href="orders?complete=<%=order.getId()%>">Mark As Complete</a>
+                    <%
+                        } else  {
+                    %>
 
+                    <a class="btn-small" disabled href="orders?complete=<%=order.getId()%>">Complete</a>
+
+                    <%
+                        }
+                    %>
+
+                </td>
             </tr>
             <%
                 }

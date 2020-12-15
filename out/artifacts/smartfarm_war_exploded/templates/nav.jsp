@@ -23,8 +23,15 @@
             <li><a href="register">Sign up</a></li>
             <%
                 }else {
-                    if (user.getType().equals("Customer")) {
+
+
+            %>hom
+            <li><a href="home.jsp">Home</a></li>
+
+            <%
+                if (user.getType().equals("Customer")) {
             %>
+
 
             <li><a href="products">Shop</a></li>
             <li><a href="orders">My Orders</a></li>
@@ -63,7 +70,7 @@
 
             <ul id="store" class="dropdown-content green darken-4">
                 <li><a href="animal-store">Animal Store</a></li>
-                <li><a href="plant-store">Plant Store</a></li>
+                <li><a href="plants-store">Plant Store</a></li>
                 <li><a href="equipment-store">Equipment Store</a></li>
             </ul>
 
@@ -91,7 +98,7 @@
         </ul>
 
         <ul id="nav-mobile" class="sidenav">
-            <li><a href="#">Navbar Link</a></li>
+            <li><a href="#">Home</a></li>
         </ul>
         <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </div>
